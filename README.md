@@ -1,245 +1,178 @@
 # 📦 API Produtos
 
-API REST desenvolvida com **Java, Spring Boot e PostgreSQL** para gerenciamento de produtos, seguindo arquitetura em camadas e boas práticas de desenvolvimento backend.
-
-A aplicação disponibiliza endpoints para cadastro, consulta, atualização e exclusão de produtos, utilizando **Spring Data JPA**, tratamento de exceções customizadas e documentação automática com **Swagger/OpenAPI**.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-![Java](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.x-green)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
-![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-Persistence-success)
-![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-brightgreen)
-![Maven](https://img.shields.io/badge/Maven-Build-red)
+![Java](https://img.shields.io/badge/Java-21-red?style=for-the-badge\&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.x-green?style=for-the-badge\&logo=springboot)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?style=for-the-badge\&logo=postgresql)
+![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-85EA2D?style=for-the-badge\&logo=swagger)
+![Maven](https://img.shields.io/badge/Maven-Build-red?style=for-the-badge\&logo=apachemaven)
+![License](https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge)
 
 ---
 
-## 🎯 Objetivo do Projeto
+# 📌 Sobre o projeto
 
-Desenvolver uma API REST para gerenciamento de produtos aplicando conceitos fundamentais do ecossistema Spring Boot, incluindo:
+A **API Produtos** é uma aplicação backend desenvolvida com **Java**, **Spring Boot** e **PostgreSQL** para gerenciamento de produtos através de uma API REST.
 
-* Arquitetura em camadas
-* Persistência de dados com JPA
-* Integração com PostgreSQL
-* DTOs para transferência de dados
-* Tratamento de exceções
-* Documentação de endpoints
-* Integração com aplicação frontend Angular
+O projeto foi desenvolvido com foco na construção de APIs, integração com banco de dados relacional utilizando JDBC, documentação com Swagger/OpenAPI e comunicação com aplicações frontend desenvolvidas em Angular.
 
 ---
 
-## 🏗️ Arquitetura da Solução
+# 🚀 Funcionalidades
+
+* Cadastro de produtos
+* Consulta de produtos por nome
+* Persistência em PostgreSQL
+* API REST desenvolvida com Spring Boot
+* Documentação da API via Swagger/OpenAPI
+* Configuração de CORS para integração com aplicações frontend
+
+> **Observação:** As operações de atualização e exclusão já possuem endpoints definidos e estão previstas para evolução do projeto.
+
+---
+
+# 🧱 Tecnologias utilizadas
+
+* Java 21
+* Spring Boot
+* Spring Web MVC
+* PostgreSQL
+* JDBC
+* Swagger / OpenAPI
+* Maven
+* REST API
+
+---
+
+# 🏗️ Estrutura do projeto
 
 ```text
-Frontend Angular
-        │
-        ▼
-API REST Spring Boot
-        │
-        ▼
-Service Layer
-        │
-        ▼
-Spring Data JPA
-        │
-        ▼
+src/main/java/br/com/cotiinformatica/produtos_api/
+
+├── configurations
+├── controllers
+├── dtos
+├── entities
+├── factories
+└── repositories
+```
+
+---
+
+# 🔗 Endpoints
+
+| Método | Endpoint                   | Descrição          |
+| ------ | -------------------------- | ------------------ |
+| POST   | `/api/v1/produtos/criar`   | Cadastrar produto  |
+| GET    | `/api/v1/produtos/listar`  | Consultar produtos |
+| PUT    | `/api/v1/produtos/alterar` | Endpoint previsto  |
+| DELETE | `/api/v1/produtos/excluir` | Endpoint previsto  |
+
+---
+
+# ⚙️ Como executar o projeto
+
+## 1. Clone o repositório
+
+```bash
+git clone https://github.com/beatrizlima-tech/produtos-api.git
+```
+
+## 2. Crie o banco de dados
+
+Crie o banco PostgreSQL e execute o script SQL disponível no projeto.
+
+## 3. Configure a conexão
+
+Caso necessário, ajuste as credenciais da classe:
+
+```text
+ConnectionFactory.java
+```
+
+## 4. Execute a aplicação
+
+```bash
+mvn spring-boot:run
+```
+
+---
+
+# 🗄️ Banco de dados
+
+Tabela principal:
+
+```sql
+CREATE TABLE produtos(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    descricao TEXT NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    quantidade INTEGER NOT NULL,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP,
+    data_exclusao TIMESTAMP,
+    ativo INT DEFAULT 1
+);
+```
+
+Banco utilizado:
+
+```text
 PostgreSQL
 ```
 
 ---
 
-## ✨ Funcionalidades
+# 📖 Documentação
 
-### Produtos
-
-* Cadastro de produtos
-* Consulta de todos os produtos
-* Consulta de produto por ID
-* Atualização de produtos
-* Exclusão de produtos
-
-### Recursos Técnicos
-
-* DTOs para entrada e saída de dados
-* Tratamento de exceções customizadas
-* Configuração de CORS
-* Documentação Swagger/OpenAPI
-* Persistência com Spring Data JPA
-* Organização em camadas
-
----
-
-## 📂 Estrutura do Projeto
+Após executar a aplicação:
 
 ```text
-src
-├── configurations
-│   ├── CorsConfiguration
-│   ├── ObjectMapperConfiguration
-│   └── SwaggerConfiguration
-│
-├── controllers
-│   └── ProdutosController
-│
-├── dtos
-│   ├── ProdutoRequestDto
-│   └── ProdutoResponseDto
-│
-├── entities
-│   └── Produto
-│
-├── enums
-│   └── Categoria
-│
-├── exceptions
-│   └── ProdutoNaoEncontradoException
-│
-├── factories
-│   └── ConnectionFactory
-│
-├── repositories
-│   └── ProdutoRepository
-│
-├── services
-│   └── ProdutoService
-│
-└── sql
-    └── Script de criação da tabela
+http://localhost:8081/swagger-ui.html
 ```
 
 ---
 
-## 🔗 Endpoints
+# 🌐 Integração com Frontend
 
-### Criar Produto
+Este projeto possui integração com a aplicação Angular:
 
-```http
-POST /api/v1/produtos
-```
+**Web Produtos**
 
-### Atualizar Produto
-
-```http
-PUT /api/v1/produtos/{id}
-```
-
-### Excluir Produto
-
-```http
-DELETE /api/v1/produtos/{id}
-```
-
-### Consultar Todos
-
-```http
-GET /api/v1/produtos
-```
-
-### Consultar Por ID
-
-```http
-GET /api/v1/produtos/{id}
-```
+https://github.com/beatrizlima-tech/web-produto
 
 ---
 
-## 📝 Exemplo de Requisição
+# 📚 Conceitos aplicados
 
-```json
-{
-  "nome": "Notebook Dell",
-  "preco": 4500.00,
-  "quantidade": 2
-}
-```
-
----
-
-## 📤 Exemplo de Resposta
-
-```json
-{
-  "id": 1,
-  "nome": "Notebook Dell",
-  "preco": 4500.00,
-  "quantidade": 2,
-  "total": 9000.00
-}
-```
-
----
-
-## 🗄️ Banco de Dados
-
-O projeto utiliza PostgreSQL para persistência dos dados.
-
-### Estrutura principal
-
-```sql
-CREATE TABLE produtos (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    preco DECIMAL(10,2) NOT NULL,
-    quantidade INTEGER NOT NULL
-);
-```
-
-O script completo encontra-se na pasta:
-
-```text
-src/main/java/br/com/cotiinformatica/api_produtos/sql
-```
-
----
-
-## 📖 Documentação da API
-
-A aplicação possui integração com Swagger/OpenAPI para facilitar testes e validação dos endpoints.
-
-Após executar o projeto, acesse:
-
-```text
-/swagger-ui/index.html
-```
-
----
-
-## 🌐 Integração Frontend
-
-Esta API é consumida pela aplicação Angular:
-
-➡️ https://github.com/beatrizlima-tech/web-produtos
-
-O frontend permite:
-
-* Cadastro de produtos
-* Consulta em tabela
-* Atualização de registros
-* Exclusão de produtos
-* Interface responsiva
-
----
-
-## 📚 Conceitos Aplicados
-
-* Programação Orientada a Objetos (POO)
-* Arquitetura em Camadas
+* Programação Orientada a Objetos
 * API REST
-* DTO Pattern
-* Repository Pattern
-* Exception Handling
-* Spring Boot
-* Spring Data JPA
+* JDBC
 * PostgreSQL
-* Integração Frontend e Backend
+* DTO Pattern
+* Arquitetura em Camadas
+* Swagger/OpenAPI
+* Integração Frontend × Backend
 
 ---
 
-## 👩‍💻 Desenvolvido por
+# 📌 Melhorias futuras
 
-**Beatriz Lima**
+* Implementar atualização de produtos
+* Implementar exclusão lógica
+* Adicionar camada de serviços
+* Migrar para Spring Data JPA
+* Criar testes automatizados
+* Dockerizar a aplicação
 
-Desenvolvedora Java Full Stack em formação, com foco em desenvolvimento backend utilizando Java, Spring Boot, APIs REST, bancos de dados relacionais e integração com aplicações frontend.
+---
+
+# 👩‍💻 Autora
+
+Desenvolvido por **Beatriz Lima**
+
+🔗 GitHub
+https://github.com/beatrizlima-tech
+
+💼 LinkedIn
+https://www.linkedin.com/in/beatrizlima-tech
